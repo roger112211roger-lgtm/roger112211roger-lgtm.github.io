@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minecraft</title>
+<style>
+* {margin:0; padding:0; box-sizing:border-box;}
+body {
+  font-family: 'Courier New', monospace;
+  background: #87ceeb; 
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* 多層雲動畫 */
+.cloud {
+  position: absolute;
+  top:0;
+  width:200px;
+  height:60px;
+  background: url('https://i.imgur.com/6Ccx1s9.png') no-repeat;
+  background-size: cover;
+  opacity:0.9;
+}
+.cloud1 {animation: moveCloud1 60s linear infinite;}
+.cloud2 {animation: moveCloud2 90s linear infinite;}
+.cloud3 {animation: moveCloud3 120s linear infinite;}
+@keyframes moveCloud1 {0% {left:-250px;} 100% {left:100%;}}
+@keyframes moveCloud2 {0% {left:100%;} 100% {left:-250px;}}
+@keyframes moveCloud3 {0% {left:-250px;} 100% {left:100%;}}
+
+/* 標題 */
+h1,h2 {font-family:'Press Start 2P', cursive; text-align:center; color:#fff; text-shadow:2px 2px #000; margin:20px 0;}
+
+/* 時間顯示 */
+#clock {
+  text-align:center;
+  font-family:'Press Start 2P', monospace;
+  color:#fff;
+  text-shadow:2px 2px #000;
+  font-size:16px;
+  margin-bottom:10px;
+}
+
+/* 容器 */
+.container {
+  background:#8b5a2b;
+  border:4px solid #654321;
+  border-radius:8px;
+  padding:20px;
+  width:90%;
+  max-width:700px;
+  margin:20px auto;
+  text-align:center;
+  box-shadow:4px 4px 0 #000;
+  position: relative;
+}
+
+/* 按鈕 */
+.btn {
+  display:inline-block;
+  padding:12px 25px;
+  background:#2e7d32;
+  border:3px solid #1b5e20;
+  color:#fff;
+  font-family: monospace;
+  font-weight:bold;
+  text-decoration:none;
+  text-transform: uppercase;
+  box-shadow:4px 4px 0 #000;
+  margin-bottom:15px;
+  transition: transform 0.1s;
+}
+.btn:hover {transform: translate(2px,2px); box-shadow:2px 2px 0 #000;}
+
+/* 輪播影片區 */
+.video-carousel {
+  position: relative;
+  width:100%;
+  padding-bottom:56.25%;
+  border:4px solid #654321;
+  border-radius:4px;
+  box-shadow:4px 4px 0 #000;
+  overflow:hidden;
+  background:#000;
+  margin-top:15px;
+}
+.video-carousel iframe {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+}
+
+/* 輪播按鈕 */
+.carousel-btn {
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:#2e7d32;
+  border:3px solid #1b5e20;
+  color:#fff;
+  padding:10px;
+  cursor:pointer;
+  font-family: monospace;
+  font-weight:bold;
+  box-shadow:2px 2px 0 #000;
+}
+.prev {left:5px;} .next {right:5px;}
+.carousel-btn:hover {transform:translateY(-50%) translate(2px,2px); box-shadow:1px 1px 0 #000;}
+
+/* 像素雨 */
+.raindrop {
+  position:absolute;
+  width:4px; height:10px;
+  background:#00f;
+  opacity:0.7;
+  animation: fall linear infinite;
+  z-index: 1000;
+}
+@keyframes fall {0% {top:-10px;} 100% {top:100vh;}}
+
+/* 飄動樹葉 */
+.leaf {
+  position:absolute;
+  width:30px; height:30px;
+  background: url('https://i.imgur.com/xGZzWDn.png') no-repeat;
+  background-size: cover;
+  animation: sway linear infinite;
+  z-index: 999;
+}
+@keyframes sway {0% {transform: translateX(0) translateY(0);} 50% {transform: translateX(30px) translateY(10px);} 100% {transform: translateX(0) translateY(0);}}
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+</style>
+</head>
+<body>
+
+<h1>Minecraft</h1>
+
+<!-- 時間顯示 -->
+<div id="clock"></div>
+
+<div class="container">
+  <p>想下載嗎？點擊這裡</p>
+  <a class="btn" href="https://www.minecraft.net/zh-hant" target="_blank">前往官方網站</a>
+</div>
+
+<div class="container">
+  <p>想加入我們的伺服器嗎？</p>
+  <a class="btn" href="https://www.minecraft.net/zh-hant" target="_blank">前往伺服器網站</a>
+</div>
+
+<h2>🎬 試玩影片</h2>
+<div class="container" style="position:relative;">
+  <div class="video-carousel" id="carousel">
+    <iframe src="https://www.youtube.com/embed/4xaP3UPQIYU" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <button class="carousel-btn prev" onclick="prevVideo()">◀</button>
+  <button class="carousel-btn next" onclick="nextVideo()">▶</button>
+</div>
+
+<!-- 多層雲 -->
+<div class="cloud cloud1" style="top:50px;"></div>
+<div class="cloud cloud2" style="top:120px;"></div>
+<div class="cloud cloud3" style="top:200px;"></div>
+
+<!-- 飄動樹葉 -->
+<div class="leaf" style="top:100px; left:30px; animation-duration:5s;"></div>
+<div class="leaf" style="top:150px; left:200px; animation-duration:7s;"></div>
+<div class="leaf" style="top:80px; left:350px; animation-duration:6s;"></div>
+
+<!-- 像素雨 -->
+<script>
+for(let i=0;i<100;i++){
+  let drop = document.createElement("div");
+  drop.className="raindrop";
+  drop.style.left=Math.random()*window.innerWidth+"px";
+  drop.style.animationDuration=(Math.random()*1+0.5)+"s";
+  drop.style.animationDelay=Math.random()*5+"s";
+  document.body.appendChild(drop);
+}
+</script>
+
+<!-- 影片輪播 -->
+<script>
+const videos = [
+  "https://www.youtube.com/embed/4xaP3UPQIYU",
+  "https://www.youtube.com/embed/dQw4w9WgXcQ",
+  "https://www.youtube.com/embed/3GwjfUFyY6M"
+];
+let currentIndex = 0;
+const carousel = document.getElementById("carousel").querySelector("iframe");
+
+function showVideo(index){
+  carousel.src = videos[index];
+}
+function nextVideo(){
+  currentIndex = (currentIndex+1) % videos.length;
+  showVideo(currentIndex);
+}
+function prevVideo(){
+  currentIndex = (currentIndex-1 + videos.length) % videos.length;
+  showVideo(currentIndex);
+}
+</script>
+
+<!-- 時間更新腳本 -->
+<script>
+function updateClock(){
+  const now = new Date();
+  const y = now.getFullYear();
+  const m = String(now.getMonth()+1).padStart(2,'0');
+  const d = String(now.getDate()).padStart(2,'0');
+  const h = String(now.getHours()).padStart(2,'0');
+  const min = String(now.getMinutes()).padStart(2,'0');
+  const s = String(now.getSeconds()).padStart(2,'0');
+  document.getElementById('clock').textContent = `${y}-${m}-${d} ${h}:${min}:${s}`;
+}
+setInterval(updateClock,1000);
+updateClock();
+</script>
+
+</body>
+</html>
